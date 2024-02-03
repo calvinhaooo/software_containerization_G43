@@ -32,6 +32,9 @@ can read and write to the database
 we build the frontend files into flask application image. 
 # Helm Chart
 ```
+How to install?
+cd to the location of helm
+Run the command: helm install ./grocery-test --generate-name
 
 ```
 # TLS
@@ -44,6 +47,7 @@ Once we have built the TLS connection,we can check whether the application is ac
 https://
 ```
 check if http request can be directed to https:
+![https](https://github.com/calvinhaooo/software_containerization_G43/assets/145265103/1de732b4-e269-42dc-a3b5-08a21a39e323)
 ```
 http://
 ```
@@ -54,18 +58,30 @@ For the backend, we define a policy which only allows egress to the PostgreSQL.
 
 To test the network policy we have defined:
 ```
+To create a pod with the labels of postgres
+sudo microk8s kubectl run test-$RANDOM --rm -i -t --image=alpine --labels="app=postgres" -- sh
+Then u will see
+If you don't see a command prompt, try pressing enter.
+/ #
+Type the command
+wget -qO- http://grocery-service-1
 
 ```
 
-![https](https://github.com/calvinhaooo/software_containerization_G43/assets/145265103/1de732b4-e269-42dc-a3b5-08a21a39e323)
+
 
 # RBAC
 check user permissions as follows
 
 ```
 sudo microk8s kubectl auth can-i list pod --namespace default --as calvin
+
 sudo microk8s kubectl auth can-i get pod --namespace default --as calvin
+
 sudo microk8s kubectl auth can-i create pod --namespace default --as calvin
+
+sudo microk8s kubectl auth can-i update pod --namespace default --as calvin
+
 ```
 
 # google cloud
