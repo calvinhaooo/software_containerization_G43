@@ -18,7 +18,8 @@
 
 ## Prequisites
 
-For installation, Docker and microk8s should be installed for our project.
+For installation, Docker and microk8s should be installed for our project.\\
+
 we also need to create a private repository  (like us-east1-docker.pkg.dev/poised-rock-413209/grocery) so we can push our docker image into it if using Google cloud 
 ```
 microk8s install
