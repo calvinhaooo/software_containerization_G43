@@ -36,37 +36,28 @@ docker build .
 docker tag dockerID us-east1-docker.pkg.dev/poised-rock-413209/grocery/zhang
 docker push us-east1-docker.pkg.dev/poised-rock-413209/grocery/zhang
 ```
+
+with microk8s,we can map the ip address and url.
+```
+/etc/hosts
+127.0.0.1 mygrocery-g43-1.com
+```
+## PostgreSQL
+
+we use a pre-built docker image and create our own Dockerfile for the database,because we want the docker to run the sql file to create the database in the beginning
+
+For PostgreSQL, the Service type is ClusterIP,such that it can be accessed by the REST API, but not by users outside of the cluster 
+
+For different information, we use different configuration(ConfigMap and Secret) to ensure security.
+
+## Stograge Class
+As our database is not non-sql ,we choose the deployment instead of using  stateful
 when using GCP,we need to use the hostPath that is allowed:
 opt is not allowed ,we can use var
 ```
 hostPath:
     path: "/var/postgres"
 ```
-with microk8s,we can map the ip address and url.
-```
-/etc/hosts
-127.0.0.1 mygrocery-g43-1.com
-```
-
-## Implement the dockerfile for configuration
-* Frontend --> css, js
-* Backend --> python flask
-* Database --> postgresql
-
-## Repository Structure
-*`grocery`
-* * `*.yaml`: kubenetes configuration files
-  * `Dockerfile`:  containerize the REST API and the Web front end
-  * `static` : rendering
-  * `temlates`: HTML
-* `helm/grocery-test`: helm char for the whole application
-* `postgres`
-* * `*.yaml`: kubenetes configuration files
-* `security`
-* * `RBAC`: Configure Role Based Access Control for the application
-  * `TLS`: Configure TLS for the web application 
-  * `policy`: Network policy control
-
 
 ## Application upgrade and re-deployment
 re-build the application after a source code change. we need to build the iamge again and push the backend image to the repository.
@@ -181,14 +172,26 @@ sudo microk8s kubectl auth can-i list pod --namespace default --as calvin
 sudo microk8s kubectl auth can-i get pod --namespace default --as calvin
 sudo microk8s kubectl auth can-i create pod --namespace default --as calvin
 ```
+## Implement the dockerfile for configuration
+* Frontend --> css, js
+* Backend --> python flask
+* Database --> postgresql
 
-## PostgreSQL
+## Repository Structure
+*`grocery`
+* * `*.yaml`: kubenetes configuration files
+  * `Dockerfile`:  containerize the REST API and the Web front end
+  * `static` : rendering
+  * `temlates`: HTML
+* `helm/grocery-test`: helm char for the whole application
+* `postgres`
+* * `*.yaml`: kubenetes configuration files
+* `security`
+* * `RBAC`: Configure Role Based Access Control for the application
+  * `TLS`: Configure TLS for the web application 
+  * `policy`: Network policy control
+  * 
 
-we use a pre-built docker image and create our own Dockerfile for the database,because we want the docker to run the sql file to create the database in the beginning
-
-For PostgreSQL, the Service type is ClusterIP,such that it can be accessed by the REST API, but not by users outside of the cluster 
-
-For different information, we use different configuration(ConfigMap and Secret) to ensure security.
 
 ## RESTAPI  Web front-end
 First we create our own Dockerfile for the image.
