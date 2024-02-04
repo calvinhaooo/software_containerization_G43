@@ -1,41 +1,22 @@
 apiVersion: apps/v1 
-
 kind: Deployment
-
 metadata:
-
   name: postgres-deployment-g43
-
 spec:
-
   replicas: 1
-
   selector:
-
     matchLabels:
-
       app: postgres
-
   template:
-
     metadata:
-
       labels:
-
         app: postgres
-
     spec:
-
       containers:
-
       - name: postgres-container-g43
-
         image: postgres:13.1-alpine
-
         imagePullPolicy: "IfNotPresent"
-
         ports:
-
           - containerPort: 5432
 
         envFrom:
