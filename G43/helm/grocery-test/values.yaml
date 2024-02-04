@@ -10,7 +10,7 @@ flask:
 container:
   name: grocery-api-container  
 image: 
-  repository: localhost:32000/grocery-app
+  repository:  us-east1-docker.pkg.dev/poised-rocked-413209/grocery/123
   pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
   tag: "v1"
@@ -25,6 +25,7 @@ db:
 dbcontainer:
  name: postgres-container-g43-1
 dbimage:
+  image: us-east1-docker.pkg.dev/poised-rocked-413209/grocery/zhang
   pullPolicy: IfNotPresent 
 dbcontainerPort: 
   port: 5432
