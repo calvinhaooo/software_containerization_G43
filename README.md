@@ -18,7 +18,7 @@
 
 ## Prequisites
 
-For installation, Docker and microk8s should be installed for our project.\\
+For installation, Docker and microk8s should be installed for our project.
 
 we also need to create a private repository  (like us-east1-docker.pkg.dev/poised-rock-413209/grocery) so we can push our docker image into it if using Google cloud 
 ```
@@ -126,11 +126,16 @@ helm list
 helm delete <helm-name>
 ```
 ## TLS
-use **cert-manager** 
+we use **cert-manager** instead if openssl. 
+
 We use a **self-signed ClusterIssuer** to create a self-signed certificates cluster-wide.certificates(signed by a self-made certificate authority). 
+
 Then, use it to bootstrap a **root certificate** which is stored in a secret(root-secret)
+
 Next, we can configure ingress with a certificate signed by CA Issuer. 
+
 Once we have built the TLS connection,we can check whether the application is accessible via https:
+
 ```
 https://mygrocery-g43-1.com
 ```
