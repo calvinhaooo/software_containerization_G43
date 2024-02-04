@@ -16,7 +16,7 @@
 ![image](https://github.com/calvinhaooo/software_containerization_G43/assets/145342600/2f2b039d-5b5f-4c67-b705-6ac09d8cb16e)
 
 
-## Prequisites
+## Pre-requisites
 
 For installation, Docker and microk8s should be installed for our project.
 
