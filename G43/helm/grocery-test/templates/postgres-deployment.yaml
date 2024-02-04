@@ -30,7 +30,7 @@ spec:
 
       - name: {{.Values.dbcontainer.name}}
 
-        image: postgres:13.1-alpine
+        image:{{.Values.dbimage.image}}
 
         imagePullPolicy: {{.Values.dbimage.pullPolicy}}
 
