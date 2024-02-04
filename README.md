@@ -51,7 +51,10 @@ For PostgreSQL, the Service type is ClusterIP,such that it can be accessed by th
 For different information, we use different configuration(ConfigMap and Secret) to ensure security.
 
 ## Stograge Class
-As our database is not non-sql ,we choose the deployment instead of using  stateful
+As our database is not non-sql ,we choose the deployment instead of using  stateful.
+
+Volume is of type ** hostPath** . 
+
 when using GCP,we need to use the hostPath that is allowed:
 opt is not allowed ,we can use var
 ```
